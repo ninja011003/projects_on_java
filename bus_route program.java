@@ -1,4 +1,5 @@
 //bus route time calculation:-
+import java.util.Scanner;
 class my_java_rough_note{
     static Scanner scan= new Scanner(System.in);
     static int no_of_bus_stops=0,no_of_bus_routes=0,k=0;
