@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+class my_java_rough_note{
+    public static int k=0; 
+    public static Scanner scan= new Scanner(System.in);
+    public static void minimixer(String str,ArrayList<String>words,int cost[],int exp[],int pre_exp){
+        for(int i=0;i<words.size();i++){
+            exp[k]=pre_exp;
+            if(words.get(i).length()>str.length())
+                    continue;
+            if(str.substring(0,words.get(i).length()).equals(words.get(i))==true){
+                exp[k]+=cost[i];
+                if(words.get(i).length()==str.length()){
+                    k++;
+                    return;
+                }
+                else{
+                    String new_str= str.substring(words.get(i).length(),str.length()); 
+                    minimixer(new_str, words, cost,exp,exp[k]);
+                    continue;
+                }
+            }
+        }
+    }
+    public static void main(String []args){
+        //input section
+        String str= scan.next();
+        int n= scan.nextInt();
+        ArrayList<String> words= new ArrayList<String>(n);
+        int cost[]= new int[n];
+        for(int i=0;i<n;i++)
+            words.add(scan.next());
+        for(int i=0;i<n;i++)
+            cost[i]=scan.nextInt();
+        int exp[]= new int[100];
+        //return a array of cost in all possible ways
+        minimixer(str,words,cost,exp,0);
+        int min=99999;
+        for(int i=0;i<k;i++)
+            if(min>exp[i])
+                min=exp[i];
+        System.out.print("output: ");
+        if(min==99999)
+            System.out.print("-1");
+        else
+            System.out.print(min);
+    }
+}
